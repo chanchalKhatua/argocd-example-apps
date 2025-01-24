@@ -1,0 +1,18 @@
+iapiVersion: batch/v1
+kind: Job
+metadata:
+  name: sockshop-db-migration
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: migrate-db
+          image: busybox
+          command:
+            - sh
+            - -c
+            - echo Running database migrations...; sleep 20
+      restartPolicy: Never
+
